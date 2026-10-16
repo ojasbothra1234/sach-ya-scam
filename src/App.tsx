@@ -103,8 +103,21 @@ export default function App() {
 
   return (
     <div className="page">
+      <div className="tricolor" aria-hidden="true" />
+      <nav className="topbar">
+        <div className="brand">
+          <img src="/shield.svg" alt="" width="28" height="28" />
+          <div>
+            <strong>Sach Ya Scam?</strong>
+            <span>Citizen Scam Checker · HACKCOM 2026 (CF-14)</span>
+          </div>
+        </div>
+        <a className="helpline" href="tel:1930">
+          Cyber Crime Helpline <strong>1930</strong>
+        </a>
+      </nav>
+
       <header className="hero">
-        <div className="badge">HACKCOM 2026 · CF-14</div>
         <h1>
           Sach <span>Ya</span> Scam?
         </h1>
@@ -259,7 +272,8 @@ export default function App() {
       </main>
 
       <footer>
-        Analysis runs entirely in your browser — nothing you paste is sent anywhere. Sach Ya Scam? gives guidance, not legal advice.
+        <p>Analysis runs entirely in your browser — nothing you paste is sent anywhere.</p>
+        <p>Sach Ya Scam? gives guidance, not legal advice. In an emergency, call 1930 or visit cybercrime.gov.in.</p>
       </footer>
     </div>
   )
