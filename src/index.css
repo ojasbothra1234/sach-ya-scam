@@ -1,16 +1,22 @@
 :root {
   font-family: Inter, 'Noto Sans', 'Noto Sans Devanagari', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.5;
-  color: #1f2937;
-  background: #f3f5f9;
+  color: #1f2b38;
+  background: #faf5e9;
   -webkit-font-smoothing: antialiased;
-  --navy: #1e3a8a;
-  --navy-deep: #172c6b;
-  --saffron: #f97316;
-  --green: #138808;
-  --border: #dde3ee;
-  --muted: #5b6577;
-  --card: #ffffff;
+  --serif: Fraunces, Georgia, 'Times New Roman', serif;
+  --hand: Caveat, 'Comic Sans MS', cursive;
+  --cream: #faf5e9;
+  --navy: #0f243a;
+  --ink: #1f2b38;
+  --muted: #526171;
+  --border: #dbe3e9;
+  --orange: #c26909;
+  --orange-soft: #ffe3b3;
+  --red: #b42317;
+  --red-soft: #fad4d0;
+  --teal: #176a6f;
+  --teal-soft: #e7f2f2;
 }
 
 * {
@@ -28,5 +34,5 @@ button {
 }
 
 a {
-  color: var(--navy);
+  color: var(--teal);
 }
