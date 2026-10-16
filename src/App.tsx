@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
 import { analyze, CATEGORY_INFO, SAMPLES } from './engine'
 import type { Analysis, Verdict } from './engine'
+import LiveCounters from './LiveCounters'
+import CallGuard from './CallGuard'
 import './App.css'
 
 const VERDICT_TEXT: Record<Verdict, { title: string; hi: string; sub: string }> = {
@@ -98,23 +100,7 @@ export default function App() {
         </aside>
       </header>
 
-      <div className="stats">
-        <div>
-          <span className="eyebrow">Cyber fraud losses</span>
-          <strong>₹22,845 cr</strong>
-          <span>lost by citizens in 2024, about three times 2023</span>
-        </div>
-        <div>
-          <span className="eyebrow">Complaints</span>
-          <strong>22.68 lakh</strong>
-          <span>on the national cybercrime portal in 2024, up 42%</span>
-        </div>
-        <div>
-          <span className="eyebrow">Digital arrest</span>
-          <strong>₹1,935 cr</strong>
-          <span>lost to “digital arrest” scams in 2024, from ₹339 cr</span>
-        </div>
-      </div>
+      <LiveCounters />
 
       <main>
         <section className="window">
@@ -238,6 +224,8 @@ export default function App() {
             </div>
           </section>
         )}
+
+        <CallGuard />
 
         <section className="help">
           <div className="help-copy">
