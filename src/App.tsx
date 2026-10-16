@@ -10,6 +10,29 @@ const VERDICT_TEXT: Record<Verdict, { title: string; hi: string; sub: string }> 
   safe: { title: 'Looks safe', hi: 'सच लगता है', sub: 'No strong scam signals found — but stay alert.' },
 }
 
+const VERDICT_ICON: Record<Verdict, ReactNode> = {
+  scam: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
+      <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+    </svg>
+  ),
+  suspicious: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 8v4" />
+      <path d="M12 16h.01" />
+    </svg>
+  ),
+  safe: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  ),
+}
+
 const REPORT_LINKS = [
   { title: 'Call 1930', sub: 'National Cyber Crime Helpline (24x7). Call within the "golden hour" to freeze stolen money.', href: 'tel:1930' },
   { title: 'cybercrime.gov.in', sub: 'File an official cyber-crime complaint online.', href: 'https://cybercrime.gov.in' },
@@ -43,11 +66,11 @@ function Highlighted({ text, analysis }: { text: string; analysis: Analysis }) {
   return <p className="highlighted">{parts}</p>
 }
 
-function Gauge({ score, verdict }: { score: number; verdict: Verdict }) {
+function Gauge({ score }: { score: number }) {
   const radius = 52
   const circumference = 2 * Math.PI * radius
   return (
-    <svg className={`gauge gauge-${verdict}`} viewBox="0 0 120 120" role="img" aria-label={`Risk score ${score} out of 100`}>
+    <svg className="gauge" viewBox="0 0 120 120" role="img" aria-label={`Risk score ${score} out of 100`}>
       <circle cx="60" cy="60" r={radius} className="gauge-track" />
       <circle
         cx="60"
@@ -81,11 +104,28 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
+        <div className="badge">HACKCOM 2026 · CF-14</div>
         <h1>
           Sach <span>Ya</span> Scam?
         </h1>
-        <p>Paste a suspicious SMS, WhatsApp message, call script or link. We'll tell you if it looks like a scam — and what to do next.</p>
+        <p className="hero-sub">
+          Paste a suspicious SMS, WhatsApp message, call script or link. We will tell you if it looks like a scam — and what to do next.
+        </p>
         <p className="hero-hi">संदिग्ध मैसेज या लिंक पेस्ट करें और जानें — सच या स्कैम?</p>
+        <div className="hero-stats">
+          <div>
+            <strong>22.7 lakh</strong>
+            <span>cyber frauds reported in 2024</span>
+          </div>
+          <div>
+            <strong>₹22,845 cr</strong>
+            <span>lost to cyber crime in 2024</span>
+          </div>
+          <div>
+            <strong>1 min</strong>
+            <span>to check before you lose it</span>
+          </div>
+        </div>
       </header>
 
       <main>
@@ -114,6 +154,7 @@ export default function App() {
             >
               Clear
             </button>
+            <span className="hint">Ctrl+Enter to check · runs offline, nothing leaves your device</span>
           </div>
           <div className="samples">
             <span>Try an example:</span>
@@ -128,9 +169,10 @@ export default function App() {
         {analysis && checked !== null && (
           <section className={`card result result-${analysis.verdict}`} aria-live="polite">
             <div className="result-head">
-              <Gauge score={analysis.score} verdict={analysis.verdict} />
+              <Gauge score={analysis.score} />
               <div>
-                <h2>
+                <h2 className="verdict-title">
+                  <span className="verdict-icon">{VERDICT_ICON[analysis.verdict]}</span>
                   {VERDICT_TEXT[analysis.verdict].title} <small>{VERDICT_TEXT[analysis.verdict].hi}</small>
                 </h2>
                 <p>{VERDICT_TEXT[analysis.verdict].sub}</p>
@@ -204,7 +246,7 @@ export default function App() {
         )}
 
         <section className="card report">
-          <h3>Been targeted? Report it — शिकायत करें</h3>
+          <h3>Been targeted? Report it — <span className="hi">शिकायत करें</span></h3>
           <div className="report-grid">
             {REPORT_LINKS.map((r) => (
               <a key={r.title} href={r.href} target="_blank" rel="noreferrer">
